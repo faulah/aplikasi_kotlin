@@ -1,4 +1,4 @@
-package com.example.aplikasi_kotlin
+package example.myapp
 
 class Aquarium3(length: Int = 100, width: Int = 20, height: Int = 40, numberOfFish: Int) {
     // Dimensions in cm

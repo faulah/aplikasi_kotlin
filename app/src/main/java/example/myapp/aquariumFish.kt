@@ -1,36 +1,44 @@
 package example.myapp
 
-import com.example.aplikasi_kotlin.Aquarium3
 
-class aquariumFish  (open var length: Int = 100, open var width: Int = 20, open var height: Int = 40) {
-    open var volume: Int
-        get() = width * height * length / 1000
-        set(value) {
-            height = (value * 1000) / (width * length)
-        }
-    open val shape = "rectangle"
-    open var water: Double = 0.0
-        get() = volume * 0.9
+open class Aquarium(open var height: Int, open var width: Int, open var length: Int) {
+    open lateinit var volume: Int
+    open lateinit var water: Double
+    open val shape: String = "cylinder"
 
-    fun printSize() {
-        println(shape)
-        println(
-            "Width: $width cm " +
-                    "Length: $length cm " +
-                    "Height: $height cm "
-        )
-        // 1 l = 1000 cm^3
-        println("Volume: $volume liters Water: $water liters (${water / volume * 100.0}% full)")
+    init {
+        volume = (width / 2 * length / 2 * height / 1000 * PI).toInt()
+        water = volume * 0.8
+    }
+
+    open fun printSize() {
+        println("Width: $width cm " +
+                "Length: $length cm " +
+                "Height: $height cm ")
+        println("Volume: $volume liters " +
+                "Water: $water liters " +
+                "Shape: $shape ")
     }
 }
-fun main() {
-    val aquarium6 = Aquarium3(numberOfFish = 29)
-    aquarium6.printSize()
+
+class TowerTank(override var height: Int, diameter: Int) : Aquarium(height, diameter, diameter) {
+    init {
+        // Initialize diameter for TowerTank
+        width = diameter
+        length = diameter
+    }
+
+    override lateinit var volume: Int
+    override lateinit var water: Double
+    override val shape: String = "cylinder"
+
+    override fun printSize() {
+        println("Width: $width cm " +
+                "Length: $length cm " +
+                "Height: $height cm ")
+        println("Volume: $volume liters " +
+                "Water: $water liters " +
+                "Shape: $shape ")
+    }
 }
-
-
-
-
-
-
 
